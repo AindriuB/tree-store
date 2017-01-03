@@ -1,5 +1,6 @@
 package com.aindriu;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -42,6 +43,22 @@ public class TreeNodeTest {
 	 * @throws Exception 
 	 */
 	@Test
+	public void testInsertFork() throws Exception {
+		TreeNode rootNode = new TreeNode();
+		String uuid = "123456789";
+		String uuidFork = "1234512345";
+		LOGGER.debug("Inserting uuid:{}", uuid);
+		assertTrue(rootNode.insert(uuid));
+
+		LOGGER.debug("Inserting forked uuid:{}", uuidFork);
+		assertTrue(rootNode.insert(uuidFork));
+	}
+
+	/**
+	 * Test method for {@link com.aindriu.TreeNode#insert(java.lang.String)}.
+	 * @throws Exception 
+	 */
+	@Test
 	public void testInsert() throws Exception {
 		TreeNode rootNode = new TreeNode();
 		String uuid = UUID.randomUUID().toString();
@@ -77,6 +94,39 @@ public class TreeNodeTest {
 		assertFalse(rootNode.checkExists(uuid.subSequence(0, uuid.length() - 1).toString()));
 		LOGGER.debug("Searching uuid:{}", uuid);
 		assertTrue(rootNode.checkExists(uuid));
+	}
+
+	@Test
+	public void testEmptyDataExists() {
+		TreeNode rootNode = new TreeNode();
+		assertFalse(rootNode.checkExists(""));
+	}
+
+	@Test
+	public void testNullExists() throws Exception {
+		TreeNode rootNode = new TreeNode();
+		assertFalse(rootNode.checkExists(null));
+
+	}
+
+	@Test
+	public void testEmptyDataInsert() {
+		TreeNode rootNode = new TreeNode();
+		try {
+			rootNode.insert("");
+		} catch (Exception e) {
+			assertEquals("Data is empty", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testNullInsert() {
+		TreeNode rootNode = new TreeNode();
+		try {
+			rootNode.insert(null);
+		} catch (Exception e) {
+			assertEquals("Data is empty", e.getMessage());
+		}
 	}
 
 }

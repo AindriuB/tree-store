@@ -20,8 +20,8 @@ public class TreeNode {
 		treeStore = new HashMap<Character, TreeNode>();
 	}
 
-	public boolean checkExists(String data) throws Exception {
-		if (data.isEmpty() || data == null) {
+	public boolean checkExists(String data) {
+		if (data == null || data.isEmpty()) {
 			if (LOGGER.isTraceEnabled()) {
 				LOGGER.trace("Data Empty | returning false");
 			}
@@ -54,7 +54,7 @@ public class TreeNode {
 	}
 
 	public boolean insert(String data) throws Exception {
-		if (data.isEmpty() || data == null) {
+		if (data == null || data.isEmpty()) {
 			throw new Exception("Data is empty");
 		}
 		char key = data.charAt(0);
